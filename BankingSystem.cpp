@@ -65,18 +65,18 @@ int main() {
 		}
 		//if no account
 		if (flag == false) {
-			char choi;
+			string choi;
 			cout << "This account number does not exist in the system.\n";
 			bool createlop;
 			do {
 				cout << "Do you want to create an account? (y/n)\n";
 				cin >> choi;
-				if (choi == 'y' || choi == 'Y') {
+				if (choi == "y" || choi == "Y") {
 					createAC(inAcNum);
 					createlop = false;
 					mainloop = true;
 				}
-				else if (choi == 'n' || choi == 'N') {
+				else if (choi == "n" || choi == "N") {
 					createlop = false;
 					mainloop = true;
 				}
@@ -149,7 +149,7 @@ void bank_menu(int i) {
 	bool menu;
 	do {
 		cout << "\n----------menu----------\n";
-		char choi;
+		string choi;
 		cout << "1.Deposit\n";
 		cout << "2.Withdraw\n";
 		cout << "3.Transfer\n";
@@ -159,27 +159,27 @@ void bank_menu(int i) {
 		do {
 			cout << "Enter your Choice : ";
 			cin >> choi;
-			if (choi == '1') {
+			if (choi == "1") {
 				deposit(i);
 				menu = true;
 				chekchoi = false;
 			}
-			else if (choi == '2') {
+			else if (choi == "2") {
 				withdraw(i);
 				menu = true;
 				chekchoi = false;
 			}
-			else if (choi == '3') {
+			else if (choi == "3") {
 				transfer(i);
 				menu = true;
 				chekchoi = false;
 			}
-			else if (choi == '4') {
+			else if (choi == "4") {
 				report(i);
 				menu = true;
 				chekchoi = false;
 			}
-			else if (choi == '5') {
+			else if (choi == "5") {
 				menu = false;
 				chekchoi = false;
 			}
