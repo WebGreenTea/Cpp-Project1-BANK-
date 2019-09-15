@@ -252,7 +252,7 @@ void transfer(int i) {
 				if (inmoney <= ACmoney[i]) {
 					ACmoney[i] -= inmoney;
 					ACmoney[j] += inmoney;
-					ACreport[j] += ("    Received from " + inAcnum + "__________________+" + sinmoney + " Baht\n");
+					ACreport[j] += ("    Received from " + ACnum[i] + "__________________+" + sinmoney + " Baht\n");
 					flagLoop = false;
 					break;
 				}
