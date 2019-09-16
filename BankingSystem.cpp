@@ -10,6 +10,7 @@ void report(int);
 void createAC(string);
 bool chekinput(string);
 bool strdigit(string);
+bool strdigit2(string);
 void show_mess1();
 string typConvert(int);
 
@@ -32,9 +33,10 @@ int main() {
 		string inAcNum;
 		bool inchek = false;
 		do {
-			
+
 			cout << "Enter account number: ";
-			cin >> inAcNum;
+			//cin >> inAcNum;
+			getline(cin, inAcNum);
 			if (inAcNum.length() == 10) {
 				if (strdigit(inAcNum) == false) {
 					inchek = true;
@@ -70,7 +72,8 @@ int main() {
 			bool createlop;
 			do {
 				cout << "Do you want to create an account? (y/n)\n";
-				cin >> choi;
+				//cin >> choi;
+				getline(cin, choi);
 				if (choi == "y" || choi == "Y") {
 					createAC(inAcNum);
 					createlop = false;
@@ -98,7 +101,8 @@ void createAC(string acnumber) {
 	do {
 		cout << "Enter the name of your account\n";
 		cout << "==>";
-		cin >> inname;
+		//cin >> inname;
+		getline(cin, inname);
 		for (int i = 0; i < 100; i++) {
 			if (ACname[i] == inname) {
 				cout << "That name already exists\n";
@@ -110,17 +114,19 @@ void createAC(string acnumber) {
 			}
 		}
 	} while (chekname == true);
-	
+
 	cout << "\nSelect Account Type\n";
 	cout << "\t1.Savings Bank Account\n";
 	cout << "\t2.Current Deposit Account\n";
 	cout << "\t3.Fixed Deposit Account\n";
-	int intype;
+	//int intype;
+	string intype;
 	bool chektype;
 	do {
 		cout << "==>";
-		cin >> intype;
-		if (intype == 1 || intype == 2 || intype == 3) {
+		//cin >> intype;
+		getline(cin, intype);
+		if (intype == "1" || intype == "2" || intype == "3") {
 			chektype = false;
 		}
 		else {
@@ -129,7 +135,7 @@ void createAC(string acnumber) {
 	} while (chektype);
 	ACname[numOfData] = inname;
 	ACnum[numOfData] = acnumber;
-	ACtype[numOfData] = intype;
+	ACtype[numOfData] = stoi(intype);
 	numOfData += 1;
 	cout << "Your account has been created.\n";
 	cout << "\tYour account info\n";
@@ -158,7 +164,8 @@ void bank_menu(int i) {
 		bool chekchoi = false;
 		do {
 			cout << "Enter your Choice : ";
-			cin >> choi;
+			//cin >> choi;
+			getline(cin, choi);
 			if (choi == "1") {
 				deposit(i);
 				menu = true;
@@ -197,8 +204,15 @@ void deposit(int i) {
 	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 	cout << "-------------------------------------\n";
 	cout << "Enter the amount of money you want to deposit.\n";
-	cout << "==> ";
-	cin >> sinmoney;
+	//check input is digit
+	bool chekinput;
+	do {
+		cout << "==> ";
+		//cin >> sinmoney;
+		getline(cin, sinmoney);
+		chekinput = strdigit2(sinmoney);
+	} while (chekinput);
+	cout << "out";
 	inmoney = stod(sinmoney);
 	cout << "-------------------------------------\n";
 	ACmoney[i] += inmoney;
@@ -215,8 +229,15 @@ void withdraw(int i) {
 	do {
 		cout << "-------------------------------------\n";
 		cout << "Enter the amount of money you want to withdraw.\n";
-		cout << "==> ";
-		cin >> sinmoney;
+		//check input is digit
+		bool chekinput;
+		do {
+			cout << "==> ";
+			//cin >> sinmoney;
+			getline(cin, sinmoney);
+			chekinput = strdigit2(sinmoney);
+		} while (chekinput);
+		
 		inmoney = stod(sinmoney);
 		cout << "-------------------------------------\n";
 		if (inmoney <= ACmoney[i]) {
@@ -237,14 +258,21 @@ void transfer(int i) {
 	string inAcnum;
 	string sinmoney;
 	double inmoney;
-	bool flagLoop = true , accuracy;
+	bool flagLoop = true, accuracy;
 	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 	do {
 		cout << "-------------------------------------\n";
 		cout << "Enter account number : ";
-		cin >> inAcnum;
-		cout << "amount : ";
-		cin >> sinmoney;
+		//cin >> inAcnum;
+		getline(cin, inAcnum);
+		//check input is digit
+		bool chekinput;
+		do {
+			cout << "amount : ";
+			//cin >> sinmoney;
+			getline(cin, sinmoney);
+			chekinput = strdigit2(sinmoney);
+		} while (chekinput);
 		inmoney = stod(sinmoney);
 		cout << "-------------------------------------\n";
 		for (int j = 0; j < 100; j++) {
@@ -267,7 +295,7 @@ void transfer(int i) {
 				accuracy = true;
 			}
 		}
-		if (flagLoop){
+		if (flagLoop) {
 			if (accuracy == true) {
 				cout << "\t!Wrong account number!\n";
 			}
@@ -277,7 +305,7 @@ void transfer(int i) {
 			cout << "\tPlease try again\n";
 		}
 	} while (flagLoop);
-	ACreport[i] += ("    Transferred to "+inAcnum+"_________________-" + sinmoney + " Baht\n");
+	ACreport[i] += ("    Transferred to " + inAcnum + "_________________-" + sinmoney + " Baht\n");
 	cout << "\tTransfer completed\n";
 	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 }
@@ -310,7 +338,7 @@ void show_mess1() {
 	cout << "\tPlease try again\n";
 }
 
-//check string digit
+//check string digit (true for is digit)
 bool strdigit(string a) {
 	bool check = true;
 	for (int i = 0; i < a.length(); i++) {
@@ -318,10 +346,27 @@ bool strdigit(string a) {
 			check = false;
 			break;
 		}
-		check = true;
+		else {
+			check = true;
+		}
 	}
 	return(check);
 }
+//check string digit(decimal) (false for is digit)
+bool strdigit2(string a) {
+	bool check = true;
+	for (int i = 0; i < a.length(); i++) {
+		if (isdigit(a.at(i)) != 0 || a.at(i) == '.') {
+			check = false;
+		}
+		else {
+			check = true;
+			break;
+		}
+	}
+	return(check);
+}	
+
 
 string typConvert(int X) {
 	string out;
