@@ -13,6 +13,8 @@ bool strdigit(string);
 bool strdigit2(string);
 void show_mess1();
 string typConvert(int);
+void reportThis(int);
+void reportAll(int);
 
 int numOfData = 5;
 string ACnum[100] = { "8775473967","6683977666","4723954794","5242242671","1286764136" };
@@ -316,6 +318,31 @@ void transfer(int i) {
 }
 //menu report
 void report(int i) {
+	string choi;
+	bool chek;
+	cout << "\n1.View Report This Account\n";
+	cout << "2.View Report All Account\n";
+	do {
+		cout << "==>";
+		getline(cin, choi);
+		if (choi == "1") {
+			reportThis(i);
+			chek = false;
+		}
+		else if (choi == "2") {
+			reportAll(i);
+			chek = false;
+		}
+		else {
+			cout << "Out of choice, ";
+			cout << "Please try again\n";
+			chek = true;
+		}
+	} while (chek);
+	system("pause");
+}
+
+void reportThis(int i) {
 	cout << "-----------------------------\n";
 	cout << "\tYour account info\n";
 	cout << "\t   Account Type : ";
@@ -333,7 +360,29 @@ void report(int i) {
 	else {
 		cout << ACreport[i];
 	}
-	system("pause");
+}
+void reportAll(int i) {
+	cout << "There are " << numOfData << " accounts in this bank.\n";
+	cout << "-----------------------------\n";
+	for (int j = 0; j < numOfData; j++) {
+		cout << "\tAccount " << j+1 << " info\n";
+		cout << "\t   Account Type : ";
+		cout << typConvert(ACtype[j]) << endl;
+		cout << "\t   Account NUMBER : ";
+		cout << ACnum[j] << endl;
+		cout << "\t   Account NAME : ";
+		cout << ACname[j] << endl;
+		cout << "\t   Account Balance : ";
+		cout << ACmoney[j] << endl;
+		cout << "\n  Account " << j+1 << " history\n";
+		if (ACreport[j] == "") {
+			cout << "    --NO HISTORY--\n";
+		}
+		else {
+			cout << ACreport[j];
+		}
+		cout << "-----------------------------\n";
+	}
 }
 
 //message1
