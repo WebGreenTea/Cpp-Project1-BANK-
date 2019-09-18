@@ -16,7 +16,7 @@ string typConvert(int);
 
 int numOfData = 5;
 string ACnum[100] = { "8775473967","6683977666","4723954794","5242242671","1286764136" };
-string ACname[100] = { "mr.a","mr.b","mr.c","mr.d","mr.e" };
+string ACname[100] = { "Mr.A","Mr.B","Mr.C","Mr.D","Mr.E" };
 double ACmoney[100] = { 100000.00,15200.79,95370.32,456132.52,95000.50 };
 int ACtype[100] = { 1,1,2,3,3 };
 string ACreport[100];
@@ -130,6 +130,8 @@ void createAC(string acnumber) {
 			chektype = false;
 		}
 		else {
+			cout << "Out of choice, ";
+			cout << "Please try again\n";
 			chektype = true;
 		}
 	} while (chektype);
@@ -154,6 +156,8 @@ void createAC(string acnumber) {
 void bank_menu(int i) {
 	bool menu;
 	do {
+		cout << "\nHallo " << ACname[i] << endl;
+		cout << "Your Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht";
 		cout << "\n----------menu----------\n";
 		string choi;
 		cout << "1.Deposit\n";
@@ -191,6 +195,8 @@ void bank_menu(int i) {
 				chekchoi = false;
 			}
 			else {
+				cout << "Out of choice, ";
+				cout << "Please try again\n";
 				chekchoi = true;
 			}
 
@@ -201,7 +207,7 @@ void bank_menu(int i) {
 void deposit(int i) {
 	double inmoney;
 	string sinmoney;
-	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
+	//cout << "\nYour Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 	cout << "-------------------------------------\n";
 	cout << "Enter the amount of money you want to deposit.\n";
 	//check input is digit
@@ -212,20 +218,19 @@ void deposit(int i) {
 		getline(cin, sinmoney);
 		chekinput = strdigit2(sinmoney);
 	} while (chekinput);
-	cout << "out";
 	inmoney = stod(sinmoney);
 	cout << "-------------------------------------\n";
 	ACmoney[i] += inmoney;
 	ACreport[i] += ("    Deposit___________________________________+" + sinmoney + " Baht\n");
-	cout << "\tDeposit completed\n";
-	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
+	cout << "\tDeposit completed\n\n";
+	//cout << "Your Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 }
 //menu wihtdraw
 void withdraw(int i) {
 	double inmoney;
 	string sinmoney;
 	bool flagloop;
-	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
+	//cout << "\nYour Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 	do {
 		cout << "-------------------------------------\n";
 		cout << "Enter the amount of money you want to withdraw.\n";
@@ -250,8 +255,8 @@ void withdraw(int i) {
 		}
 	} while (flagloop);
 	ACreport[i] += ("    Wihtdraw__________________________________-" + sinmoney + " Baht\n");
-	cout << "\tWithdraw completed\n";
-	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
+	cout << "\tWithdraw completed\n\n";
+	//cout << "Your Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 }
 //menu tranfer
 void transfer(int i) {
@@ -259,7 +264,7 @@ void transfer(int i) {
 	string sinmoney;
 	double inmoney;
 	bool flagLoop = true, accuracy;
-	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
+	//cout << "\nYour Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 	do {
 		cout << "-------------------------------------\n";
 		cout << "Enter account number : ";
@@ -306,8 +311,8 @@ void transfer(int i) {
 		}
 	} while (flagLoop);
 	ACreport[i] += ("    Transferred to " + inAcnum + "_________________-" + sinmoney + " Baht\n");
-	cout << "\tTransfer completed\n";
-	cout << "your current money : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
+	cout << "\tTransfer completed\n\n";
+	//cout << "Your Balance : " << fixed << setprecision(2) << ACmoney[i] << " Baht" << endl;
 }
 //menu report
 void report(int i) {
